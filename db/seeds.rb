@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Category.destroy_all
+puts '🌱 Seeding spices...'
+
+# Seed your database here
+Category.create(name: 'Work')
+Category.create(name: 'Personal')
+Category.create(name: 'Chores')
+Category.create(name: 'Shopping')
+Category.create(name: 'Miscellaneous')
+Category.create(name: 'Exercise')
+
+puts '✅ Done seeding!'

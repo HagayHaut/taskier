@@ -5,7 +5,7 @@ import AddTask from "./components/AddTask";
 import LandingPage from "./components/LandingPage";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-const API = "https://immense-retreat-28463.herokuapp.com";
+const API = "http://localhost:3000";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -16,18 +16,35 @@ function App() {
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then(setUser);
+        r.json().then((user) => {
+          setUser(user);
+          getUserTasks(user.id);
+        });
       }
     });
   }, []);
 
-  useEffect(() => {
-    fetch(API + "/tasks")
-      .then((r) => r.json())
-      .then(setTasks);
-  }, []);
+  // useEffect(() => {
+  //   fetch(API + `/users/${user.id}/tasks`)
+  //     .then((r) => r.json())
+  //     .then(setTasks);
+  // }, []);
 
-  if (!user) return <LandingPage onLogin={(user) => setUser(user)} />;
+  if (!user) return <LandingPage onLogin={handleLogin} />;
+
+  async function getUserTasks(id) {
+    const resp = await fetch(API + `/users/${id}/tasks`);
+    if (resp.ok) {
+      const tasks = await resp.json();
+      console.log(tasks);
+      setTasks(tasks);
+    }
+  }
+
+  function handleLogin(user) {
+    setUser(user);
+    getUserTasks(user.id);
+  }
 
   //Fetch task
   const fetchTask = async (id) => {
@@ -45,10 +62,11 @@ function App() {
       },
       body: JSON.stringify(task),
     });
-
-    const data = await res.json();
-
-    setTasks([...tasks, data]);
+    if (res.ok) {
+      const data = await res.json();
+      console.log(data);
+      setTasks([...tasks, data]);
+    }
   };
 
   //Delete Task
@@ -107,9 +125,22 @@ function App() {
     setIsDarkMode((isDarkMode) => !isDarkMode);
   };
 
+  const handleLogout = () => {
+    fetch("/logout", {
+      method: "DELETE",
+    }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+      } else {
+        console.log("else");
+      }
+    });
+  };
+
   return (
     <Router>
       <div className={isDarkMode ? "container dark" : "container"}>
+        <button onClick={handleLogout}>Logout</button>
         <Header
           onAdd={() => setShowAddTask(!showAddTask)}
           showAdd={showAddTask}
@@ -124,7 +155,7 @@ function App() {
             <>
               {showAddTask && (
                 <>
-                  <AddTask onAdd={addTask} />
+                  <AddTask onAdd={addTask} user={user} />
                   <div className="divider"></div>
                 </>
               )}
