@@ -70,12 +70,14 @@ function App() {
   };
 
   //Delete Task
-  const deleteTask = async (id) => {
-    await fetch(API + "/tasks/" + id, {
+  const deleteTask = (id) => {
+    fetch(API + "/tasks/" + id, {
       method: "DELETE",
+    }).then((r) => {
+      if (r.ok) {
+        setTasks(tasks.filter((task) => task.id !== id));
+      }
     });
-
-    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   //Toggle Reminder
