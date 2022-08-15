@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # resources :categories
-  resources :tasks, only: %i[index create destroy]
+  resources :tasks
   resources :users, only: [:index] do
     resources :tasks, only: [:index]
   end
