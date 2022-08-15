@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "./Header";
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("");
@@ -31,22 +32,25 @@ const Login = ({ onLogin }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={username}
-          type="text"
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter your username..."
-        />
-        <input
-          value={password}
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your password..."
-        />
-        <input type="submit" />
-        {errors.length ? errors.map((err, i) => <p key={i}>{err}</p>) : null}
-      </form>
+      <h1>Taskier</h1>
+      <div class="login-form-container">
+        <form onSubmit={handleSubmit}>
+          <input
+            value={username}
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter your username..."
+          />
+          <input
+            value={password}
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password..."
+          />
+          <button type="submit">Submit</button>
+          {errors.length ? errors.map((err, i) => <p key={i}>{err}</p>) : null}
+        </form>
+      </div>
     </>
   );
 };

@@ -7,12 +7,14 @@ const LandingPage = ({ onLogin }) => {
 
   return (
     <>
-      <div>
+      <div className="form-container">
         {login ? <Login onLogin={onLogin} /> : <Signup onLogin={onLogin} />}
+
+        <p>{login ? "New user?" : "Already a user?"}</p>
+        <button onClick={() => setLogin((prev) => !prev)}>
+          {login ? "Signup" : "Login"}
+        </button>
       </div>
-      <button onClick={() => setLogin((prev) => !prev)}>
-        {login ? "Signup" : "Login"}
-      </button>
     </>
   );
 };
