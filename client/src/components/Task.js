@@ -15,16 +15,16 @@ function Task({ task, onToggle, onDelete, onMarkComplete, isDarkMode }) {
   return (
     <div className={taskClassName()} onDoubleClick={() => onToggle(id)}>
       <h3>
-        {description} <p className="category_tag">{category.name}</p>
+        {description} <p className="category_tag">{category}</p>
         <p className="h4_date">By: {date_format}</p>
         <FaCheckDouble
-          style={{ position: "relative", top: -70, left: 348 }}
+          style={{ position: "relative", top: -87, left: 348 }}
           title="Mark As Completed"
           className={isDarkMode ? "complete dark" : "complete"}
           onClick={() => onMarkComplete(task.id)}
         />
         <FaTimes
-          style={{ position: "relative", top: -70, left: 350 }}
+          style={{ position: "relative", top: -87, left: 350 }}
           title="Delete Task"
           className={isDarkMode ? "delete dark" : "delete"}
           onClick={() => onDelete(task.id)}
