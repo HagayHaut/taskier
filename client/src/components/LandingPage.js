@@ -11,9 +11,9 @@ const LandingPage = ({ onLogin }) => {
         {login ? <Login onLogin={onLogin} /> : <Signup onLogin={onLogin} />}
 
         <p>{login ? "New user?" : "Already a user?"}</p>
-        <button onClick={() => setLogin((prev) => !prev)}>
-          {login ? "Signup" : "Login"}
-        </button>
+        <h3 className="login-btns" onClick={() => setLogin((prev) => !prev)}>
+          {login ? "Signup for free" : "Go to Login"}
+        </h3>
       </div>
     </>
   );

@@ -142,7 +142,9 @@ function App() {
   return (
     <Router>
       <div className={isDarkMode ? "container dark" : "container"}>
-        <button onClick={handleLogout}>Logout</button>
+        <p className="logout-btn" onClick={handleLogout}>
+          Logout
+        </p>
         <Header
           onAdd={() => setShowAddTask(!showAddTask)}
           showAdd={showAddTask}

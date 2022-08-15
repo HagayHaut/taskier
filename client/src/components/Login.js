@@ -47,7 +47,13 @@ const Login = ({ onLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password..."
           />
-          <button type="submit">Submit</button>
+          <button
+            className="btn"
+            style={{ backgroundColor: "green" }}
+            type="submit"
+          >
+            Login
+          </button>
           {errors.length ? errors.map((err, i) => <p key={i}>{err}</p>) : null}
         </form>
       </div>

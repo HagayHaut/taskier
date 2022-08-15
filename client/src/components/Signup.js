@@ -58,7 +58,13 @@ const Signup = ({ onLogin }) => {
             name="password_confirmation"
             onChange={handleChange}
           ></input>
-          <button type="submit">Submit</button>
+          <button
+            className="btn"
+            style={{ backgroundColor: "green" }}
+            type="submit"
+          >
+            Signup
+          </button>
           <div>
             {errors.length
               ? errors.map((e) => {
